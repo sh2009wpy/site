@@ -1,0 +1,45 @@
+name: String Storage API
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  add-string:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run add_string script
+        run: node scripts/add_string.js "example string"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  get-strings:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run get_strings script
+        run: node scripts/get_strings.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
